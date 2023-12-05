@@ -1,0 +1,36 @@
+version: '3.9'
+services:
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    restart: always
+    platform: linux/x86_64
+    ports:
+      - "3308:3306"
+    volumes:
+      - mysql-volumes:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: admin12345678
+      MYSQL_DATABASE: mainRestaurante
+
+  api:
+    container_name: main-restaurante
+    ports:
+      - "89:80"
+    build:
+      context: ./
+      dockerfile: ./dockerfile
+    volumes:
+      - ./:/var/www/html
+    env_file:
+      - .env
+    depends_on:
+      - mysql
+
+volumes:
+  mysql-volumes:
+
+networks:
+  default:
+    name: main-restaurante-app
