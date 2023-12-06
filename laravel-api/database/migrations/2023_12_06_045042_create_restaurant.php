@@ -10,18 +10,17 @@ return new class() extends Migration {
      */
     public function up(): void
     {
-        Schema::create('personal_access_tokens', function (Blueprint $table) {
+        Schema::create('restaurant', function (Blueprint $table) {
             $table->id();
-            $table->morphs('tokenable');
-            $table->string('name');
-            $table->string('token', 64)
-                ->unique();
-            $table->text('abilities')
+            $table->string('fantasy_name');
+            $table->string('company_name')
                 ->nullable();
-            $table->timestamp('last_used_at')
+            $table->string('identification_doc');
+            $table->string('describe')
                 ->nullable();
-            $table->timestamp('expires_at')
-                ->nullable();
+            $table->string('address');
+            $table->string('opening_hours')
+                ->default('Seg. a Sex. das 11:00 às 15:00hrs e das 19:00 às 00:00hrs');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ return new class() extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('personal_access_tokens');
+        Schema::dropIfExists('restaurant');
     }
 };

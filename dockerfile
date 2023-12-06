@@ -13,7 +13,8 @@ RUN apt-get update && \
     libssl-dev \
     curl \
     libcurl4-gnutls-dev \
-    libxml2-dev libicu-dev \
+    libxml2-dev \ 
+    libicu-dev \
     libmcrypt4 \
     libmemcached11 \
     libfreetype6-dev \
@@ -29,40 +30,43 @@ RUN apt-get update && \
     libzip-dev \
     autoconf \
     libtool \
-    # pdo_mysql \
-    # gd \
     zip \
-    # mysqli \
     make \
     nginx \
     git \
     supervisor \
     openssl
 
-RUN docker-php-ext-configure gd && \
-    docker-php-ext-install -j$(nproc) pdo pdo_mysql mysqli opcache bcmath bz2 intl sockets soap gmp gd && \
+RUN docker-php-ext-install gd
+RUN docker-php-ext-configure gd
+RUN docker-php-ext-install pdo pdo_mysql mysqli && docker-php-ext-enable pdo_mysql 
+RUN docker-php-ext-install opcache bcmath bz2 intl sockets soap gmp && \
     pecl install apcu-5.1.22 && \
     docker-php-ext-enable apcu && \
     pecl install redis && \
     docker-php-ext-enable redis
 
-# Configure services
+# # Configure services
 COPY docker/nginx/conf/default.conf /etc/nginx/nginx.conf
 COPY docker/nginx/conf/fpm-pool.conf /etc/php7/php-fpm.d/www.conf
 COPY docker/php/php.ini /etc/php7/conf.d/custom.ini
 COPY docker/php/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY entrypoint.sh /entrypoint.sh
 
-# Setup document root
+# # Setup document root
 RUN mkdir -p /var/www/html
 
-# Install PHP dependencies
+# # Install PHP dependencies
 COPY ./laravel-api /var/www/html
 
-# Install Composer
+# # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer && \
     composer update && \
     composer install
+
+#install xdebug
+RUN pecl install xdebug
+COPY 90-xdebug.ini "${PHP_INI_DIR}"/conf.d
 
 RUN chmod +x /entrypoint.sh && \
     chmod -R 777 /var/www/html/storage && \

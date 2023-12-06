@@ -1,9 +1,9 @@
 version: '3.9'
 services:
 
-  mysql:
+  mysqlGrao:
     image: mysql:latest
-    container_name: mysql
+    container_name: mysql-grao
     restart: always
     platform: linux/x86_64
     ports:
@@ -24,9 +24,9 @@ services:
       context: ./
       dockerfile: ./dockerfile
     env_file:
-      - .env
+      - ./laravel-api/.env
     depends_on:
-      - mysql
+      - mysqlGrao
 
 volumes:
   mysql-volumes:
