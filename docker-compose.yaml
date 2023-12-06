@@ -18,11 +18,11 @@ services:
     container_name: main-restaurante
     ports:
       - "89:80"
+    volumes:
+      - ./laravel-api:/var/www/html
     build:
       context: ./
       dockerfile: ./dockerfile
-    volumes:
-      - ./:/var/www/html
     env_file:
       - .env
     depends_on:

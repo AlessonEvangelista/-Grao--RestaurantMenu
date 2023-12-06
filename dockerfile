@@ -55,10 +55,9 @@ COPY entrypoint.sh /entrypoint.sh
 
 # Setup document root
 RUN mkdir -p /var/www/html
-RUN chmod 777 -R /var/www/html/storage/
 
 # Install PHP dependencies
-COPY . /var/www/html/
+COPY ./laravel-api /var/www/html
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer && \
