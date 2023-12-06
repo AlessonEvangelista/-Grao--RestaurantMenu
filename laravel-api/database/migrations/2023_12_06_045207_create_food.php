@@ -10,16 +10,18 @@ return new class() extends Migration {
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('food', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('category_id');
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('category');
             $table->string('name');
-            $table->string('identification_doc')
+            $table->string('description')
                 ->nullable();
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')
-                ->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->decimal('value', 10, 2);
+            $table->boolean('status')
+                ->default(false);
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ return new class() extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('food');
     }
 };

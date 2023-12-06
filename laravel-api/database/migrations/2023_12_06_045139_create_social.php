@@ -10,16 +10,15 @@ return new class() extends Migration {
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('social', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('identification_doc')
-                ->nullable();
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')
-                ->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->enum('social',
+                ['Facebook', 'Instagran', 'X', 'Linkedin', 'Other']);
+            $table->string('url')->nullable();
+            $table->unsignedInteger('restaurant_id');
+            $table->foreign('restaurant_id')
+                ->references('id')
+                ->on('restaurant');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class() extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('social');
     }
 };

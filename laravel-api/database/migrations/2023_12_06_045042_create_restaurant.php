@@ -10,16 +10,17 @@ return new class() extends Migration {
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('restaurant', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('identification_doc')
+            $table->string('fantasy_name');
+            $table->string('company_name')
                 ->nullable();
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')
+            $table->string('identification_doc');
+            $table->string('describe')
                 ->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('address');
+            $table->string('opening_hours')
+                ->default('Seg. a Sex. das 11:00 às 15:00hrs e das 19:00 às 00:00hrs');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ return new class() extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('restaurant');
     }
 };
