@@ -10,15 +10,17 @@ return new class() extends Migration {
      */
     public function up(): void
     {
-        Schema::create('contacts', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('contact');
-            $table->enum('type',
-                ['phone', 'email']);
-            $table->boolean('main')
-                ->default(false);
-            $table->unsignedBigInteger('restaurant_id');
-            $table->foreign('restaurant_id')
+            $table->string('name');
+            $table->unsignedBigInteger('dad_category')
+                ->nullable();
+            $table->foreign('dad_category')
+                ->references('id')
+                ->on('categories')
+                ->onDelete('cascade');
+            $table->unsignedBigInteger('restaurants_id');
+            $table->foreign('restaurants_id')
                 ->references('id')
                 ->on('restaurants')
                 ->onDelete('cascade');
@@ -31,6 +33,6 @@ return new class() extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('contacts');
+        Schema::dropIfExists('category');
     }
 };

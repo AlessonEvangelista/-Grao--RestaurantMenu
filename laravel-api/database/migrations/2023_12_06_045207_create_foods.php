@@ -10,18 +10,18 @@ return new class() extends Migration {
      */
     public function up(): void
     {
-        Schema::create('food', function (Blueprint $table) {
+        Schema::create('foods', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')
                 ->references('id')
-                ->on('category');
+                ->on('categories');
             $table->string('name');
             $table->string('description')
                 ->nullable();
             $table->decimal('value', 10, 2);
             $table->boolean('status')
-                ->default(false);
+                ->default(true);
             $table->timestamps();
         });
     }
