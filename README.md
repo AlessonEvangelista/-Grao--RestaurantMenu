@@ -21,5 +21,5 @@
       ( expose ports:
         Mysql: 3308 -> 3306  expose 3308 to don't have conflict with another database;
         API: 127.0.0.1:89 )
-  :: HOSTS CONFIGURATION
-    ... If need i explain that
+:: HOSTS CONFIGURATION
+  ... If need i explain that
