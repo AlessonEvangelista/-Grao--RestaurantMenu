@@ -10,14 +10,15 @@ return new class() extends Migration {
      */
     public function up(): void
     {
-        Schema::create('category', function (Blueprint $table) {
+        Schema::create('socials', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->unsignedBigInteger('dad_category')
-                ->nullable();
-            $table->foreign('dad_category')
+            $table->enum('social',
+                ['Facebook', 'Instagran', 'X', 'Linkedin', 'Other']);
+            $table->string('url')->nullable();
+            $table->unsignedBigInteger('restaurant_id');
+            $table->foreign('restaurant_id')
                 ->references('id')
-                ->on('category')
+                ->on('restaurants')
                 ->onDelete('cascade');
             $table->timestamps();
         });
@@ -28,6 +29,6 @@ return new class() extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('category');
+        Schema::dropIfExists('social');
     }
 };
