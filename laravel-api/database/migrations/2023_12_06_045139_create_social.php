@@ -15,10 +15,11 @@ return new class() extends Migration {
             $table->enum('social',
                 ['Facebook', 'Instagran', 'X', 'Linkedin', 'Other']);
             $table->string('url')->nullable();
-            $table->unsignedInteger('restaurant_id');
+            $table->unsignedBigInteger('restaurant_id');
             $table->foreign('restaurant_id')
                 ->references('id')
-                ->on('restaurant');
+                ->on('restaurant')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -17,10 +17,11 @@ return new class() extends Migration {
                 ['phone', 'email']);
             $table->boolean('main')
                 ->default(false);
-            $table->unsignedInteger('restaurant_id');
+            $table->unsignedBigInteger('restaurant_id');
             $table->foreign('restaurant_id')
                 ->references('id')
-                ->on('restaurant');
+                ->on('restaurant')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
