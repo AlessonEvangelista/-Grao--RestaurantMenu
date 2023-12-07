@@ -19,8 +19,8 @@ return new class() extends Migration {
                 ->references('id')
                 ->on('categories')
                 ->onDelete('cascade');
-            $table->unsignedBigInteger('restaurants_id');
-            $table->foreign('restaurants_id')
+            $table->unsignedBigInteger('restaurant_id');
+            $table->foreign('restaurant_id')
                 ->references('id')
                 ->on('restaurants')
                 ->onDelete('cascade');
