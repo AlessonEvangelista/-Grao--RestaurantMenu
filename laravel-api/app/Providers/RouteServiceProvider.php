@@ -20,6 +20,13 @@ class RouteServiceProvider extends ServiceProvider
     public const HOME = '/home';
 
     /**
+     * The controller namespace for the application.
+     *
+     * @var string|null
+     */
+    protected $namespace = 'App\\Http\\Controllers';
+
+    /**
      * Define your route model bindings, pattern filters, and other route configuration.
      */
     public function boot(): void
@@ -30,11 +37,30 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->routes(function () {
             Route::middleware('api')
-                ->prefix('api')
-                ->group(base_path('routes/api.php'));
+                ->namespace($this->namespace)
+                ->group(function () {
+                    /*
+                     * Routes for api
+                     */
+                    Route::middleware([])
+                        ->prefix('api')
+                        ->namespace('Api')
+                        ->group(function () {
+                            Route::prefix('users')
+                                ->name('users.')
+                                ->group(base_path('routes/V1/User.php'));
 
-            Route::middleware('web')
-                ->group(base_path('routes/web.php'));
+                            Route::prefix('restaurants')
+                            ->name('restaurants.')
+                            ->group(base_path('routes/V1/Restaurant.php'));
+                        });
+                });
+
+            /*
+             * Removed because not using
+             */
+            // Route::middleware('web')
+            //     ->group(base_path('routes/web.php'));
         });
     }
 }
