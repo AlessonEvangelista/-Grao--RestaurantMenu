@@ -5,7 +5,7 @@ namespace App\Http\Resources\Api\V1;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class SocialResources extends JsonResource
+class FoodResources extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,11 +15,14 @@ class SocialResources extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'social' => $this->social,
-            'url' => $this->url,
+            'id' => (int) $this->id,
+            'name' => (string) $this->name,
+            'description' => (string) $this->description,
+            'value' => 'R$ '.number_format($this->value, 2, ',', '.'),
+            'status' => (bool) $this->status,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
+            'category' => CategoryResources::collection($this->whenLoaded('foodCategory')),
         ];
     }
 }

@@ -13,16 +13,16 @@ return new class() extends Migration {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->unsignedBigInteger('restaurant_id');
+            $table->foreign('restaurant_id')
+                ->references('id')
+                ->on('restaurants')
+                ->onDelete('cascade');
             $table->unsignedBigInteger('dad_category')
                 ->nullable();
             $table->foreign('dad_category')
                 ->references('id')
                 ->on('categories')
-                ->onDelete('cascade');
-            $table->unsignedBigInteger('restaurant_id');
-            $table->foreign('restaurant_id')
-                ->references('id')
-                ->on('restaurants')
                 ->onDelete('cascade');
             $table->timestamps();
         });

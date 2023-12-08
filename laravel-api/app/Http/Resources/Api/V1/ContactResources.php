@@ -14,6 +14,13 @@ class ContactResources extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => (int) $this->id,
+            'contact' => (string) $this->contact,
+            'type' => (bool) $this->type,
+            'main' => (int) $this->main,
+            'created_at' => (string) $this->created_at,
+            'updated_at' => (string) $this->updated_at,
+        ];
     }
 }

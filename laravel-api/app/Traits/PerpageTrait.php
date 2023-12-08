@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-class PerpageTrait
+trait PerpageTrait
 {
     protected int $perPage = 0;
 

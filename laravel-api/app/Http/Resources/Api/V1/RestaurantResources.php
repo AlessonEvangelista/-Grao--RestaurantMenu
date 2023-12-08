@@ -24,7 +24,9 @@ class RestaurantResources extends JsonResource
             'opening_hours' => $this->opening_hours,
             'Categories' => CategoryResources::collection($this->whenLoaded('restaurantCategory')),
             'Socials' => SocialResources::collection($this->whenLoaded('restaurantSocial')),
-            'Contacts' => ContactResources::collection($this->whenLoaded('restaurantCategory')),
+            'Contacts' => ContactResources::collection($this->whenLoaded('restaurantContacts')),
+            'created_at' => (string) $this->created_at,
+            'updated_at' => (string) $this->updated_at,
         ];
     }
 }
