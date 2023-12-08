@@ -11,8 +11,8 @@ Route::prefix('v1')
     ->controller('restaurantController')
     ->group(function () {
         Route::resource('', 'RestaurantController')->except([
-            'create', 'edit', 'store', 'destroy',
+            'create', 'edit',
         ])->parameters([
-            '' => 'id',
+            '' => 'restaurant',
         ]);
     });

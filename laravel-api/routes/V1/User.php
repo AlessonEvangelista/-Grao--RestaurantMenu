@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return 'Enjoy the Silence for People...';
+    return 'Enjoy the Silence for Users...';
 });
 
 Route::prefix('v1')
@@ -11,7 +11,7 @@ Route::prefix('v1')
     ->controller('userController')
     ->group(function () {
         Route::resource('', 'UserController')->except([
-            'create', 'edit', 'store', 'destroy',
+            'create', 'edit',
         ])->parameters([
             '' => 'id',
         ]);

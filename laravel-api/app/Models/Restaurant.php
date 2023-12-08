@@ -20,12 +20,12 @@ class Restaurant extends Model
     ];
 
     public $allowedIncludes = [
-        'restauratContacts' => 'restauratContacts',
+        'restaurantContacts' => 'restaurantContacts',
         'restaurantSocial' => 'restaurantSocial',
         'restaurantCategory' => 'restaurantCategory',
     ];
 
-    public function restauratContacts(): HasMany
+    public function restaurantContacts(): HasMany
     {
         return $this->hasMany(Contacts::class);
     }

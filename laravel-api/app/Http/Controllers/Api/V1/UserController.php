@@ -9,10 +9,22 @@ use App\Services\Api\V1\UserServices;
 
 class UserController extends BaseController
 {
+    public $validated;
+
     public function __construct()
     {
+        $this->validator();
         $this->defaultResource = UserResources::class;
         $this->defaultService = (new UserServices())
             ->setModel(User::class);
+    }
+
+    public function validator()
+    {
+        $this->validated = [
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
+        ];
     }
 }
