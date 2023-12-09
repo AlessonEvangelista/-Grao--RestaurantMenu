@@ -14,14 +14,15 @@ class Contacts extends Model
         'contact',
         'type',
         'main',
+        'restaurant_id',
     ];
 
-    protected $allowedIncludes = [
-        'contactRestaurant' => 'contactRestaurant',
+    public $allowedIncludes = [
+        'restaurant' => 'restaurant',
     ];
 
-    public function contactRestaurant(): BelongsTo
+    public function restaurant(): BelongsTo
     {
-        return $this->belongsTo(Restaurant::class);
+        return $this->belongsTo(Restaurant::class, 'restaurant_id');
     }
 }

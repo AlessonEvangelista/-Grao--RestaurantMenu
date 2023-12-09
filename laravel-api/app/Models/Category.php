@@ -13,20 +13,22 @@ class Category extends Model
 
     protected $fillable = [
         'name',
+        'restaurant_id',
+        'category_id',
     ];
 
     public $allowedIncludes = [
-        'categoriesDadCategory' => 'categoriesDadCategory',
-        'categoriesFood' => 'categoriesFood',
+        'children' => 'children',
+        'restaurant' => 'restaurant',
     ];
 
-    public function categoriesDadCategory(): BelongsTo
+    public function children(): HasMany
     {
-        return $this->belongsTo(Category::class);
+        return $this->hasMany(Category::class, 'category_id');
     }
 
-    public function categoriesFood(): HasMany
+    public function restaurant(): BelongsTo
     {
-        return $this->hasMany(Food::class);
+        return $this->belongsTo(Restaurant::class, 'restaurant_id');
     }
 }

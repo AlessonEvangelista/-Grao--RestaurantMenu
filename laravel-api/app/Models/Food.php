@@ -15,7 +15,8 @@ class Food extends Model
     protected $fillable = [
         'name',
         'description',
-        'values',
+        'value',
+        'category_id',
         'status',
     ];
 
@@ -25,6 +26,6 @@ class Food extends Model
 
     public function foodCategory(): BelongsTo
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id');
     }
 }
