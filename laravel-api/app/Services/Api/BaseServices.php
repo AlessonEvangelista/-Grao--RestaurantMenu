@@ -23,10 +23,10 @@ class BaseServices implements BaseServicesInterface
     protected array $data = [];
     protected array $searchableColumns = [];
     protected array $searchableBy = [];
+    protected bool $destroyRelapted = false;
 
     public function index(): LengthAwarePaginator|Collection
     {
-        // return $this->getModel()->all();
         $query = $this->defaultQuery();
 
         if (request()->include) {
@@ -110,31 +110,33 @@ class BaseServices implements BaseServicesInterface
         /*
          * Get relaptions
          */
-        foreach ($this->defaultModel->allowedIncludes as $relapted) {
-            /*
-             * Get Models to Relaption
-             */
-            foreach ($element->$relapted->all() as $item) {
+        if ($this->destroyRelapted) {
+            foreach ($this->defaultModel->allowedIncludes as $relapted) {
                 /*
-                 * Models contains relaptions
-                 */
-                if ($item->allowedIncludes) {
+                * Get Models to Relaption
+                */
+                foreach ($element->$relapted->all() as $item) {
                     /*
-                     * Get relaptions
-                     */
-                    foreach ($item->allowedIncludes as $secondRelaption) {
-                        if (!empty($item->$secondRelaption)) {
-                            /*
-                             * Get Models to relaptions
-                             */
-                            foreach ($item->$secondRelaption->all() as $seconditem) {
-                                $seconditem->delete();
+                    * Models contains relaptions
+                    */
+                    if ($item->allowedIncludes) {
+                        /*
+                        * Get relaptions
+                        */
+                        foreach ($item->allowedIncludes as $secondRelaption) {
+                            if (!empty($item->$secondRelaption)) {
+                                /*
+                                * Get Models to relaptions
+                                */
+                                foreach ($item->$secondRelaption->all() as $seconditem) {
+                                    $seconditem->delete();
+                                }
                             }
                         }
                     }
-                }
 
-                $item->delete();
+                    $item->delete();
+                }
             }
         }
 

@@ -22,7 +22,7 @@ class FoodResources extends JsonResource
             'status' => (bool) $this->status,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
-            'category' => CategoryResources::collection($this->whenLoaded('foodCategory')),
+            'category' => new CategoryResources($this->whenLoaded('foodCategory')),
         ];
     }
 }

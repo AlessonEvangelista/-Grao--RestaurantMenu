@@ -20,6 +20,7 @@ class SocialResources extends JsonResource
             'url' => $this->url,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
+            'restaurant' => new RestaurantResources($this->whenLoaded('restaurant')),
         ];
     }
 }
