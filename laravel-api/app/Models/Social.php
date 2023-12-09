@@ -13,14 +13,15 @@ class Social extends Model
     protected $fillable = [
         'social',
         'url',
+        'restaurant_id',
     ];
 
-    protected $allowedIncludes = [
-        'socialRestaurant' => 'socialRestaurant',
+    public $allowedIncludes = [
+        'restaurant' => 'restaurant',
     ];
 
-    public function socialRestaurant(): BelongsTo
+    public function restaurant(): BelongsTo
     {
-        return $this->belongsTo(Restaurant::class);
+        return $this->belongsTo(Restaurant::class, 'restaurant_id');
     }
 }

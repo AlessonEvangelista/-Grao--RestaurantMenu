@@ -53,6 +53,22 @@ class RouteServiceProvider extends ServiceProvider
                             Route::prefix('restaurants')
                             ->name('restaurants.')
                             ->group(base_path('routes/V1/Restaurant.php'));
+
+                            Route::prefix('categories')
+                            ->name('categories.')
+                            ->group(base_path('routes/V1/Category.php'));
+
+                            Route::prefix('foods')
+                            ->name('foods.')
+                            ->group(base_path('routes/V1/Food.php'));
+
+                            Route::prefix('contacts')
+                            ->name('contacts.')
+                            ->group(base_path('routes/V1/Contact.php'));
+
+                            Route::prefix('socials')
+                            ->name('socials.')
+                            ->group(base_path('routes/V1/Social.php'));
                         });
                 });
 

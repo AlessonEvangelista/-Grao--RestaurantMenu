@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Collection;
 
 class RestaurantService extends BaseServices
 {
+    protected bool $destroyRelapted = true;
+
     public function __construct()
     {
         $this->searchableColumns = [
@@ -15,7 +17,6 @@ class RestaurantService extends BaseServices
             'company_name',
         ];
     }
-
 
     public function index(): LengthAwarePaginator|Collection
     {

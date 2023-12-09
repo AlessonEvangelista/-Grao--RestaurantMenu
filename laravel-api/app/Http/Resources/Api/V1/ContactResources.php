@@ -17,10 +17,11 @@ class ContactResources extends JsonResource
         return [
             'id' => (int) $this->id,
             'contact' => (string) $this->contact,
-            'type' => (bool) $this->type,
+            'type' => (string) $this->type,
             'main' => (int) $this->main,
             'created_at' => (string) $this->created_at,
             'updated_at' => (string) $this->updated_at,
+            'restaurant' => new RestaurantResources($this->whenLoaded('restaurant')),
         ];
     }
 }
