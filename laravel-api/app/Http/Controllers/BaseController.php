@@ -17,6 +17,11 @@ class BaseController extends Controller
     public $validated = [];
     public $load = [];
 
+    public function permissionAuthenticated()
+    {
+        $this->middleware(['auth:sanctum'])->only(['show', 'update', 'store', 'destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      */

@@ -20,6 +20,7 @@ class CategoryController extends BaseController
         $this->defaultResource = CategoryResources::class;
         $this->defaultService = (new CategoryService())
             ->setModel(Category::class);
+        $this->permissionAuthenticated();
     }
 
     public function validator()

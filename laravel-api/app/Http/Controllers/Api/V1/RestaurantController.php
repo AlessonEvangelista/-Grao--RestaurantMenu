@@ -23,6 +23,7 @@ class RestaurantController extends BaseController
         $this->defaultResource = RestaurantResources::class;
         $this->defaultService = (new RestaurantService())
             ->setModel(Restaurant::class);
+        $this->permissionAuthenticated();
     }
 
     public function validator()
