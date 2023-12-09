@@ -69,6 +69,10 @@ class RouteServiceProvider extends ServiceProvider
                             Route::prefix('socials')
                             ->name('socials.')
                             ->group(base_path('routes/V1/Social.php'));
+
+                            Route::prefix('auth')
+                            ->name('auth.')
+                            ->group(base_path('routes/V1/Auth.php'));
                         });
                 });
 

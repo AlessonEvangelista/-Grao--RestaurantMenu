@@ -21,6 +21,7 @@ class SocialController extends BaseController
         $this->defaultResource = SocialResources::class;
         $this->defaultService = (new SocialService())
             ->setModel(Social::class);
+        $this->permissionAuthenticated();
     }
 
     public function validator()

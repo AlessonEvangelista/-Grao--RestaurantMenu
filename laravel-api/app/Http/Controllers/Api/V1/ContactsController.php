@@ -20,6 +20,7 @@ class ContactsController extends BaseController
         $this->defaultResource = ContactResources::class;
         $this->defaultService = (new ContactsService())
             ->setModel(Contacts::class);
+        $this->permissionAuthenticated();
     }
 
     public function validator()
