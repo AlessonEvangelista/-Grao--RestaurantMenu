@@ -17,6 +17,7 @@ class UserController extends BaseController
         $this->defaultResource = UserResources::class;
         $this->defaultService = (new UserServices())
             ->setModel(User::class);
+        $this->permissionAuthenticated();
     }
 
     public function validator()
