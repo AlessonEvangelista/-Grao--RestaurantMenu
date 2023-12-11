@@ -11,6 +11,7 @@ Route::prefix('v1')
     ->controller('AuthController')
     ->group(function () {
         Route::post('login', 'login');
+        Route::get('verify', 'verify');
     });
 
 Route::middleware('auth:sanctum')
@@ -19,4 +20,5 @@ Route::middleware('auth:sanctum')
     ->controller('AuthController')
     ->group(function () {
         Route::post('logout', 'logout');
+        Route::post('logoutByToken', 'logoutByToken');
     });
