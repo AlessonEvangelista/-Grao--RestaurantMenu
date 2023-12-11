@@ -18,6 +18,7 @@ class AuthController extends Controller
         if (Auth::attempt($request->only('email', 'password'))) {
             return $this->response('Authorized', 200, [
                 'token' => $request->user()->createToken('user')->plainTextToken,
+                'user' => $request->user(),
             ]);
         }
 
@@ -29,5 +30,20 @@ class AuthController extends Controller
         $request->user()->currentAccessToken()->delete();
 
         return $this->response('Token Revoked', 200);
+    }
+
+    public function logoutByToken(): JsonResponse
+    {
+        if (auth('sanctum')->check()) {
+            auth()->user()->tokens()->delete();
+        }
+
+        return $this->response('Token Revoked', 200);
+    }
+
+    public function verify(): JsonResponse
+    {
+        return $this->response('Check token', 200, ['data' => auth('sanctum')->check(),
+        ]);
     }
 }

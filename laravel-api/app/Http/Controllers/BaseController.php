@@ -27,9 +27,7 @@ class BaseController extends Controller
      */
     public function index(): JsonResponse
     {
-        return response()->json(
-            data: $this->defaultResource::collection($this->defaultService->index())
-        );
+        return $this->response('Data', 200, $this->defaultResource::collection($this->defaultService->index()));
     }
 
     /**
