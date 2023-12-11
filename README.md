@@ -7,8 +7,11 @@
 
   - #### [docker] - build's conf's to aplications 
   - #### [laravel-api] - Path to API
-  - #### [Design-architeture] - Path with plaining design archituture implements
-  - #### [Design-uml] - Path with Diagram's to plataform 
+  - #### [Design] - Path with Diagrams and Figma
+  - #### [Routes] - Export to json Route to Insomnia
+    - #### [Design-architeture] - Path with plaining design archituture implements
+    - #### [Design-uml] - Path with Diagram's to plataform 
+    - #### [Figma] - Figma images
   - #### [Front] - Path with front plataform(web or app) to chose
 
 -----------------------
@@ -25,6 +28,11 @@
     - ( expose ports:
     - Mysql: 3308 -> 3306  expose 3308 to don't have conflict with another database;
     - API: 127.0.0.1:89 )
+
+## SCRIBE API DOCS
+> Using for APi Documentation
+
+
         
 # HOSTS CONFIGURATION
   ### If need i explain that
