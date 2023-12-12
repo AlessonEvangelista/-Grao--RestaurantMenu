@@ -1,4 +1,4 @@
-import {ref} from 'vue';
+import {computed, ref} from 'vue';
 import {defineStore} from 'pinia'
 import Http from '@/services/http.js';
 
@@ -17,9 +17,10 @@ export const useAuthStore = defineStore('auth', () => {
         localStorage.setItem('user', JSON.stringify(userValue));
         token.user = userValue
     }
-    function saveUserData(user) {
-        const passwd = user.password
-    }
+
+    const isAuthenticated = computed(() => {
+        return token.value && user.value;
+    });
 
     function getToken(){
         return 'Bearer ' + token.value;
@@ -40,21 +41,12 @@ export const useAuthStore = defineStore('auth', () => {
         }
     }
 
-    async function logoutUser() {
+    async function clear() {
         try {
-            const tokenAuth = getToken();
-            const userLog = {
-                email: user.email,
-                password: passwd
-            }
-            
-            const {data} = await Http.post('/auth/v1/logout',userLog, {
-                headers: {
-                    Authorization: tokenAuth
-                }
-            });
-            console.log(data)
-            return data.status == 200 ? true : false;
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            token.value = '';
+            user.value = '';
         } catch (error) {
             console.log(error.response.data);
         }
@@ -66,6 +58,7 @@ export const useAuthStore = defineStore('auth', () => {
         setToken, 
         setUser,
         checkToken,
-        logoutUser
+        isAuthenticated,
+        clear
     }
 })
